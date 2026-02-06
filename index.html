@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>💘 Propuesta San Valentín</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      min-height: 100vh;
+
+      background: radial-gradient(circle, #ff3b6f, #ff8fb3, #ffd1dc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 50px;
+      border-radius: 30px;
+      box-shadow: 0px 0px 35px rgba(0,0,0,0.4);
+      backdrop-filter: blur(12px);
+      max-width: 900px;
+      width: 90%;
+      position: relative;
+      z-index: 5;
+      margin: 30px 0;
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 15px rgba(0,0,0,0.4);
+    }
+
+    h2 {
+      font-size: 3.3rem;
+      margin-bottom: 25px;
+      text-shadow: 3px 3px 20px rgba(0,0,0,0.5);
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-top: 25px;
+      position: relative;
+      height: 90px;
+    }
+
+    button {
+      padding: 15px 45px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: transform 0.2s ease;
+      z-index: 999;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #yesBtn {
+      background: #00d26a;
+      color: white;
+      box-shadow: 0px 0px 25px rgba(0, 255, 140, 0.8);
+    }
+
+    #noBtn {
+      background: #ff2e2e;
+      color: white;
+      box-shadow: 0px 0px 25px rgba(255, 0, 0, 0.7);
+      position: relative;
+      z-index: 9999;
+    }
+
+    /* Corazones flotando */
+    .heart {
+      position: absolute;
+      bottom: -50px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.9;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-110vh) scale(2); opacity: 0; }
+    }
+
+    /* Mensaje TE AMO */
+    #loveMessage {
+      display: none;
+      font-size: 4.3rem;
+      margin-top: 25px;
+      color: #fff;
+      text-shadow: 0px 0px 25px #ff004c, 0px 0px 50px #ff77a8;
+      animation: pop 0.7s ease-in-out infinite alternate;
+    }
+
+    @keyframes pop {
+      from { transform: scale(1); }
+      to { transform: scale(1.15); }
+    }
+
+    #finalText {
+      display: none;
+      font-size: 1.6rem;
+      margin-top: 15px;
+      text-shadow: 0px 0px 15px rgba(0,0,0,0.5);
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Caritas enojadas */
+    .angryFace {
+      position: absolute;
+      font-size: 50px;
+      animation: angryPop 1.5s ease forwards;
+      z-index: 50;
+    }
+
+    @keyframes angryPop {
+      0% { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(2.8); opacity: 0; }
+    }
+
+    /* Confeti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      top: -20px;
+      animation: confettiFall 4s linear forwards;
+      z-index: 40;
+    }
+
+    @keyframes confettiFall {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(1080deg); opacity: 0; }
+    }
+
+    /* Fuegos artificiales */
+    .firework {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      animation: explode 1.3s ease-out forwards;
+      z-index: 60;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(0.5); opacity: 1; }
+      100% { transform: scale(12); opacity: 0; }
+    }
+
+    /* Texto explosivo */
+    .fireText {
+      position: absolute;
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0px 0px 20px #ff004c, 0px 0px 40px #fff;
+      animation: fireTextAnim 2s ease-out forwards;
+      z-index: 80;
+    }
+
+    @keyframes fireTextAnim {
+      0% { transform: scale(0.5); opacity: 0; }
+      25% { transform: scale(1.6); opacity: 1; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* CONTADOR MISTERIOSO */
+    #countdownBox {
+      display: none;
+      margin-top: 25px;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.85);
+      border: 2px solid rgba(255,255,255,0.25);
+      box-shadow: 0px 0px 25px rgba(0,0,0,0.8);
+      position: relative;
+      overflow: hidden;
+      color: #00ffea;
+      font-family: "Courier New", monospace;
+    }
+
+    #countdownTitle {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #ff4dff;
+      text-shadow: 0px 0px 15px rgba(255, 0, 255, 0.8);
+      margin-bottom: 10px;
+      z-index: 3;
+      position: relative;
+    }
+
+    #countdown {
+      font-size: 1.7rem;
+      font-weight: bold;
+      z-index: 3;
+      position: relative;
+      text-shadow: 0px 0px 15px rgba(0,255,255,0.8);
+    }
+
+    /* Fondo de ???? moviéndose */
+    .mysteryBg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height:  200%;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.08) 0px,
+        rgba(255,255,255,0.08) 20px,
+        rgba(0,0,0,0) 20px,
+        rgba(0,0,0,0) 40px
+      );
+      animation: moveBg 5s linear infinite;
+      opacity: 0.35;
+      z-index: 1;
+    }
+
+    @keyframes moveBg {
+      from { transform: translate(0,0); }
+      to { transform: translate(-200px, -200px); }
+    }
+
+    /* Signos ??? flotando dentro del contador */
+    .question {
+      position: absolute;
+      font-size: 2.5rem;
+      color: rgba(255,255,255,0.18);
+      animation: floatQuestion 6s linear infinite;
+      z-index: 2;
+    }
+
+    @keyframes floatQuestion {
+      0% { transform: translateY(120px) rotate(0deg); opacity: 0; }
+      30% { opacity: 0.5; }
+      100% { transform: translateY(-180px) rotate(360deg); opacity: 0; }
+    }
+
+    /* TEMBLOR BOTÓN NO */
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      50% { transform: translateX(8px); }
+      75% { transform: translateX(-8px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>💌 Te lo pregunto hoy y te lo volveré a preguntar mil y un veces más 💌</h1>
+    <h2>¿Quieres ser mi Valentín? 💘</h2>
+
+    <div class="buttons">
+      <button id="yesBtn">SÍ 💖</button>
+      <button id="noBtn">NO 😡</button>
+    </div>
+
+    <div id="loveMessage">💖 TE AMO 💖</div>
+    <div id="finalText">💘 Prometo cuidarte, hacerte reír y darte amor siempre 💘</div>
+
+    <div id="countdownBox">
+      <div class="mysteryBg"></div>
+      <div id="countdownTitle">🕵️‍♂️ S O R P R E S A 🕵️‍♀️</div>
+      <div id="countdown"></div>
+    </div>
+  </div>
+
+  <!-- Música -->
+  <audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const loveMessage = document.getElementById("loveMessage");
+    const finalText = document.getElementById("finalText");
+    const countdownBox = document.getElementById("countdownBox");
+    const countdownText = document.getElementById("countdown");
+    const music = document.getElementById("music");
+
+    let yesScale = 1;
+    let alreadyClickedYes = false;
+
+    // Corazones flotando
+    function createHeart() {
+      const hearts = ["💗","💖","💘","❤️","💕","💞"];
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      heart.style.fontSize = (Math.random() * 25 + 20) + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createHeart, 300);
+
+    // Caritas enojadas cuando den click NO
+    function angryFaces() {
+      const faces = ["😡", "😠", "🤬", "😤", "👿"];
+      const face = document.createElement("div");
+      face.classList.add("angryFace");
+      face.innerHTML = faces[Math.floor(Math.random() * faces.length)];
+      face.style.left = Math.random() * 90 + "vw";
+      face.style.top = Math.random() * 80 + "vh";
+      document.body.appendChild(face);
+
+      setTimeout(() => face.remove(), 1500);
+    }
+
+    // Botón NO siempre dentro de la pantalla
+    function moveNoButton() {
+      const maxX = window.innerWidth - noBtn.offsetWidth - 50;
+      const maxY = window.innerHeight - noBtn.offsetHeight - 50;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("click", () => {
+      if (alreadyClickedYes) return;
+
+      moveNoButton();
+      angryFaces();
+
+      // Crece el botón SÍ cada vez que le da NO 😈
+      yesScale += 0.08;
+      yesBtn.style.transform = `scale(${yesScale})`;
+    });
+
+    // Confeti reducido
+    function createConfetti() {
+      for (let i = 0; i < 80; i++) {
+        const confetti = document.createElement("div");
+        confetti.classList.add("confetti");
+
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+        confetti.style.width = (Math.random() * 8 + 4) + "px";
+        confetti.style.height = (Math.random() * 8 + 4) + "px";
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + "s";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => confetti.remove(), 3500);
+      }
+    }
+
+    // Fuegos artificiales
+    function fireworks() {
+      for (let i = 0; i < 30; i++) {
+        const firework = document.createElement("div");
+        firework.classList.add("firework");
+
+        firework.style.left = Math.random() * 100 + "vw";
+        firework.style.top = Math.random() * 100 + "vh";
+        firework.style.background = `hsl(${Math.random() * 360}, 100%, 70%)`;
+
+        document.body.appendChild(firework);
+
+        setTimeout(() => firework.remove(), 1300);
+      }
+    }
+
+    // Texto explosivo TE AMO
+    function fireLoveText() {
+      const texts = ["🔥 TE AMO 🔥", "💖 ERES MI TODO 💖", "💘 MI VALENTÍN 💘", "💞 SOLO TÚ 💞"];
+      const fireText = document.createElement("div");
+      fireText.classList.add("fireText");
+      fireText.innerHTML = texts[Math.floor(Math.random() * texts.length)];
+      fireText.style.left = Math.random() * 60 + 20 + "vw";
+      fireText.style.top = Math.random() * 60 + 20 + "vh";
+      document.body.appendChild(fireText);
+
+      setTimeout(() => fireText.remove(), 2000);
+    }
+
+    // Signos ??? dentro del contador misterioso
+    function createQuestionMarks() {
+      const q = document.createElement("div");
+      q.classList.add("question");
+      q.innerHTML = "???";
+      q.style.left = Math.random() * 90 + "%";
+      q.style.top = Math.random() * 100 + "%";
+      q.style.fontSize = (Math.random() * 30 + 20) + "px";
+      countdownBox.appendChild(q);
+
+      setTimeout(() => q.remove(), 6000);
+    }
+
+    // Contador hasta 14 de febrero
+    function startCountdown() {
+      const now = new Date();
+      const year = now.getFullYear();
+      let targetDate = new Date(year, 1, 14, 0, 0, 0);
+
+      if (now > targetDate) {
+        targetDate = new Date(year + 1, 1, 14, 0, 0, 0);
+      }
+
+      function updateCountdown() {
+        const current = new Date();
+        const diff = targetDate - current;
+
+        if (diff <= 0) {
+          countdownText.innerHTML = "🎉 HOY ES 14 DE FEBRERO 💖";
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        countdownText.innerHTML = `⏳ ${days}D : ${hours}H : ${minutes}M : ${seconds}S`;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    // Evento botón SÍ
+    yesBtn.addEventListener("click", () => {
+      if (alreadyClickedYes) return;
+      alreadyClickedYes = true;
+
+      loveMessage.style.display = "block";
+      finalText.style.display = "block";
+      countdownBox.style.display = "block";
+
+      // BOTÓN NO TIEMBLA Y DESAPARECE
+      noBtn.style.animation = "shake 0.4s infinite";
+
+      setTimeout(() => {
+        noBtn.style.transition = "all 0.6s ease";
+        noBtn.style.transform = "scale(0)";
+        noBtn.style.opacity = "0";
+
+        setTimeout(() => {
+          noBtn.style.display = "none";
+        }, 600);
+      }, 600);
+
+      // Fondo más intenso
+      document.body.style.background = "radial-gradient(circle, #ff004c, #ff85a1, #ffd6e0)";
+
+      // Música
+      music.volume = 0.4;
+      music.play();
+
+      startCountdown();
+
+      createConfetti();
+      fireworks();
+      fireLoveText();
+
+      setInterval(createConfetti, 2500);
+      setInterval(fireworks, 1200);
+      setInterval(fireLoveText, 1500);
+      setInterval(createQuestionMarks, 600);
+    });
+  </script>
+
+</body>
+</html>
